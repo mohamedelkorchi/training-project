@@ -21,13 +21,13 @@ class HelloController extends AbstractController
     //     dd("hello $name");
     // }
 
-    // #[Route("/hello/{name?World}", name:"hello")]
+    // #[Route("/hello/{name?World}", name:"hello")]   // la methode suivante est identique 
     // public function hello($name)
     // {
     //     return new Response("Hello $name");
     // }
 
-    #[Route("/hello/{name}", name:"hello")]      // changement de contrainte ar defaut "World"
+    #[Route("/hello/{name<\D+>}", name:"hello")]      // changement de contrainte par defaut "World"
     public function hello($name = "world")
     {
         return new Response("Hello $name");
