@@ -3,9 +3,9 @@ index:
     path: /
 
 # test:
-#     path: /test/{age}
+#     path: /test/{age<\d+>?0}
 #     controller: App\Controller\TestController::test     
 #     defaults: # raccourcis dans le paramettre age {age?0}
-#         age: 0
-#     requirements: # raccourcis {age<\d+>}
-#         age: \d+
+#         # age: 0
+#     # requirements: # raccourcis {age<\d+>}
+#         # age: \d+
