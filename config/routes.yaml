@@ -2,6 +2,10 @@ index:
     controller: App\Controller\TestController::index
     path: /
 
-test:
-    path: /test
-    controller: App\Controller\TestController::test     
+# test:
+#     path: /test/{age}
+#     controller: App\Controller\TestController::test     
+#     defaults: # raccourcis dans le paramettre age {age?0}
+#         age: 0
+#     requirements: # raccourcis {age<\d+>}
+#         age: \d+
