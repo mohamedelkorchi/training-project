@@ -2,10 +2,11 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HelloController extends AbstractController
 {
@@ -27,9 +28,16 @@ class HelloController extends AbstractController
     //     return new Response("Hello $name");
     // }
 
+    protected $logger;
+    public function __construct(LoggerInterface $logger)
+    {
+        $this->logger = $logger;
+    }
+
     #[Route("/hello/{name<\D+>}", name:"hello")]      // changement de contrainte par defaut "World"
     public function hello($name = "world")
     {
+        $this->logger->info("mon message log");
         return new Response("Hello $name");
     }
 }
