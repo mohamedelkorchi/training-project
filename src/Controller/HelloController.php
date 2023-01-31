@@ -2,6 +2,9 @@
 
 namespace App\Controller;
 
+use App\Taxes\Calculator;
+
+
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,16 +31,34 @@ class HelloController extends AbstractController
     //     return new Response("Hello $name");
     // }
 
-    protected $logger;
-    public function __construct(LoggerInterface $logger)
+    protected $calculator;
+
+    public function __construct(Calculator $calculator)
     {
-        $this->logger = $logger;
+        $this->calculator = $calculator;
     }
 
-    #[Route("/hello/{name<\D+>}", name:"hello")]      // changement de contrainte par defaut "World"
-    public function hello($name = "world")
+
+    // protected $logger;
+
+    // public function __construct(LoggerInterface $logger)
+    // {
+    //     $this->logger = $logger;
+    // }
+   
+
+    #[Route("/hello/{name<\D+>}", name:"hello")]            // changement de contrainte par defaut "World"
+    public function hello($name = "world"/*, LoggerInterface $logger */)
     {
-        $this->logger->info("mon message log");
+        
+        // $logger->error("mon message log2");               /*fonctionne pas sur la page /hello*/
+        $tva = $this->calculator->calcul(100);
+        dd($tva);
+        
+
+
         return new Response("Hello $name");
+
+
     }
 }

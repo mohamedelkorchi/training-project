@@ -2,18 +2,32 @@
 
 namespace App\Controller;
 
+use App\Taxes\Calculator;
+
+// use App\Controller\TestController;
+use App\Controller\TestController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class TestController
+class TestController extends AbstractController
 {
+
+    protected $calculator;
+
+    public function __construct(\App\Taxes\Calculator $calculer)
+    {
+        $this->calculator = $calculer;
+    }
     
      #[Route("/", name: "index")]
      
     public function index()
     {
-        var_dump("Ca fonctionne");
+       $tva = $this->calculator->calcul(200);
+       dump($tva);
+        dump("Ca fonctionne");
         die();
     }
 
